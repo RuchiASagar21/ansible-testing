@@ -7,6 +7,10 @@
   gather_facts: true
   environment:
     PATH: '{{ ansible_env.PATH }}:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin'
+  pre_tasks:
+    - name: Enable CRB repo (Rocky8)
+      command: dnf config-manager --set-enabled crb
+      become: yes  
   roles:
     - base_packages
   tasks:
