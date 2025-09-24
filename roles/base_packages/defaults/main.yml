@@ -1,0 +1,134 @@
+---
+
+# defaults are applied if nothing overwrites them in the vars/main.yml
+
+base_packages:
+  - authselect
+  - compat-*
+  - environment-modules
+  - htop
+  - lapack*
+  - libcurl-devel
+  - libSM-devel
+  - libX11-devel
+  - libXcursor-devel
+  - libXext
+  - libXi-devel
+  - libXinerama-devel
+  - libxml2-devel
+  - libXmu-devel
+  - libXrandr-devel
+  - libXt-devel
+  - libXtst-devel
+  - lvm2*
+  - koan
+  - mailx
+  - telnet
+  - wget
+  - xfs*
+  - xorg-x11-server-devel
+  - yum-utils
+
+compiler_tools:
+  - autoconf
+  - automake
+  - cmake*
+  - elfutils
+  - gcc*
+  - git
+  - glibc
+  - glibc-static
+  - json-c-devel
+  - json-glib-devel
+  - libasan
+  - libatomic-static
+  - libgdiplus-devel
+  - libgfortran
+  - libgit2-devel
+  - libicu-devel
+  - libitm
+  - libstdc++-static
+  - libtool-ltdl
+  - make*
+  - qt5-qtbase-devel
+
+compression_packages:
+  - bzip2-devel
+  - lzma
+  - xz-devel
+  - libzip-devel
+
+database_packages:
+  - "*bdb*"
+  - mariadb-devel
+  - readline-devel
+  - sqlite-devel
+  - unixODBC-devel
+
+encryption_packages:
+  - crypto*
+  - hmaccalc
+  - libsodium-devel
+  - openssl-devel
+
+font_packages:
+  - fontconfig-devel
+  - freetype-devel
+  - fribidi-devel
+  - ncurses-devel
+  - ncurses-libs
+
+graphics_packages:
+  - cairo-devel
+  - gmp-devel
+  - ImageMagick-c++-devel
+  - mesa-libGL-devel
+  - libGLEW
+  - mesa-libGLU-devel
+  - libjpeg-turbo-devel
+  - libpng-devel
+  - libtiff-devel
+  - libXrender-devel
+  - mesa-libGL-devel
+  - mesa-libGLU-devel
+
+network_packages:
+  - samba-client
+
+scripting_packages:
+  - jq
+  - pcre2-devel
+  - pcre-devel
+  - perl
+  - tcl-devel
+  - tcl-mysqltcl
+  - tk-devel
+
+scientific_packages:
+  - blas*
+  - ganglia
+  - ganglia-gmond
+  - gdal
+  - gdal-devel
+  - gdbm-devel
+  - geos-devel
+  - glpk-devel
+  - hdf5-devel
+  - lapack*
+  - libev-devel
+  - libquadmath
+  - openblas*
+  - openhpi
+  - openhpi-libs
+  - openmp*
+  - proj-devel
+  - udunits2
+  - udunits2-devel
+
+text_packages:
+  - harfbuzz-devel
+  - pango-devel
+  - poppler-cpp-devel
+  - texinfo
+  - texinfo-tex
+  - texlive

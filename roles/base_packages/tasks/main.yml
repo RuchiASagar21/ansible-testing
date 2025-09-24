@@ -1,0 +1,86 @@
+---
+
+
+- name: Ensure the yum cache is up-to-date
+  ansible.builtin.yum:
+    update_cache: true
+
+- name: Install the rhel8 epel-release
+  ansible.builtin.dnf:
+    name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm'
+    disable_gpg_check: true
+    state: present
+
+- name: Install required base packages
+  ansible.builtin.package:
+    name: "{{item}}"
+    state: present
+  with_items: "{{base_packages}}"
+
+- name: Install required compiler tools
+  ansible.builtin.package:
+    name: "{{item}}"
+    state: present
+  with_items: "{{compiler_tools}}"
+
+- name: Install required compression/archiving packages
+  ansible.builtin.package:
+    name: "{{item}}"
+    state: present
+  with_items: "{{compression_packages}}"
+
+- name: Install required encryption packages
+  ansible.builtin.package:
+    name: "{{item}}"
+    state: present
+  with_items: "{{encryption_packages}}"
+
+- name: Install required font packages
+  ansible.builtin.package:
+    name: "{{item}}"
+    state: present
+  with_items: "{{font_packages}}"
+
+- name: Install required graphics packages
+  ansible.builtin.package:
+    name: "{{item}}"
+    state: present
+  with_items: "{{graphics_packages}}"
+
+- name: Install required network-related packages
+  ansible.builtin.package:
+    name: "{{item}}"
+    state: present
+  with_items: "{{network_packages}}"
+
+- name: Install required scientific packages
+  ansible.builtin.package:
+    name: "{{item}}"
+    state: present
+  with_items: "{{scientific_packages}}"
+
+# NOTE: the libmariadb-dev package has a dependency on libmysqlclient-dev
+# which breaks the installation of libgdal-dev, unless libgdal-dev is installed first
+- name: Install required database packages
+  ansible.builtin.package:
+    name: "{{item}}"
+    state: present
+  with_items: "{{database_packages}}"
+
+- name: Install required scripting packages
+  ansible.builtin.package:
+    name: "{{item}}"
+    state: present
+  with_items: "{{scripting_packages}}"
+
+- name: Install required text packages
+  ansible.builtin.package:
+    name: "{{item}}"
+    state: present
+  with_items: "{{text_packages}}"
+
+- name: Download awscli
+  ansible.builtin.unarchive:
+    src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+    dest: /tmp
+    remote_src: yes
