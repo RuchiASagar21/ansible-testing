@@ -1,6 +1,11 @@
 ---
 
 # defaults are applied if nothing overwrites them in the vars/main.yml
+required_rocky8_repositories:
+  - powertools
+
+required_rocky9_repositories:
+  - crb
 
 base_packages:
   - authselect
