@@ -1,6 +1,28 @@
 ---
 
 
+# NOTE: this repo is required to allow xorg-x11-server-devel package
+#       to be installed on rocky8
+- name: Ensure required rocky8 repositories are enabled
+  community.general.dnf_config_manager:
+    name: "{{item}}"
+    state: enabled
+  with_items: "{{required_rocky8_repositories}}"
+  when:
+    - ansible_distribution == "Rocky"
+    - ansible_distribution_major_version == "8"
+
+# NOTE: this repo is required to allow xorg-x11-server-devel package
+#       to be installed on rocky9
+- name: Ensure required rocky9 repositories are enabled
+  community.general.dnf_config_manager:
+    name: "{{item}}"
+    state: enabled
+  with_items: "{{required_rocky9_repositories}}"
+  when:
+    - ansible_distribution == "Rocky"
+    - ansible_distribution_major_version == "9"
+
 - name: Ensure the yum cache is up-to-date
   ansible.builtin.yum:
     update_cache: true
