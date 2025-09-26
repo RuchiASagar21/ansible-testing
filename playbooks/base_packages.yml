@@ -9,8 +9,4 @@
     PATH: '{{ ansible_env.PATH }}:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin'
   roles:
     - base_packages
-  tasks:
-# NOTE: this is required because SELinux was set to enforcing and we had to disable it
-    - name: Reboot server
-      ansible.builtin.reboot:
-        reboot_timeout: 3600
+    - security

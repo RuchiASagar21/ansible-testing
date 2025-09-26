@@ -1,0 +1,46 @@
+---
+
+
+# this was set to 027 for RHEL8 which is too restrictive and needs to be set to 022 for posit to work
+- name: Set UMASK in /etc/login.defs
+  ansible.builtin.lineinfile:
+    path: /etc/login.defs
+    regexp: '^UMASK'
+    line: 'UMASK    022'
+    state: present
+    backup: yes
+  register: umask_login_changed  
+
+# this was also set to 027 for RHEL8 which is too restrictive and needs to be set to 022 for posit to work
+- name: Set UMASK in /etc/profile
+  ansible.builtin.lineinfile:
+    path: /etc/profile
+    regexp: '^    umask 027'
+    line: '    umask 022'
+    state: present
+    backup: yes
+  register: umask_profile_changed
+
+# NOTE:  selinux needs to be set to disabled to allow rstudio-server to launch the
+#        rstudio-launcher on port 5559 this will require a reboot of the server to
+#        take effect, but as ansible is running on the local machine the reboot cannot
+#        take place immediately as it will - of course - kill the ansible process itself
+- name: Disable SELinux in /etc/selinux/config
+  ansible.builtin.lineinfile:
+    path: /etc/selinux/config
+    regexp: '^SELINUX=enforcing'
+    line: 'SELINUX=disabled'
+    state: present
+    backup: yes
+  register: selinux_changed
+
+# NOTE: this reset_connection should be conditional as well
+# forces ansible to logout/log back in to the connection so the umask change (above) takes effect
+- name: Reset connection so umask change (above) is picked up.
+  meta: reset_connection
+  when: "(umask_login_changed) or (umask_profile_changed)"
+
+# NOTE: this is required because SELinux was set to enforcing and we had to disable it
+- name: Reboot for selinux
+  ansible.builtin.shell: reboot now
+  when: selinux_changed
